@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+io.thatworked.support.common.logging.config.LoggingConfiguration
