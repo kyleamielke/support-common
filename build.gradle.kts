@@ -1,7 +1,7 @@
 plugins {
     `java-library`
-    id("org.springframework.boot") version "3.2.0" apply false
-    id("io.spring.dependency-management") version "1.1.4"
+    id("org.springframework.boot") version "3.4.1" apply false
+    id("io.spring.dependency-management") version "1.1.7"
 }
 
 group = "io.thatworked.support"
@@ -24,7 +24,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.boot:spring-boot-dependencies:3.2.0")
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.4.1")
     }
 }
 
@@ -32,6 +32,13 @@ dependencies {
     // Spring Boot dependencies (optional since this is a library)
     compileOnly("org.springframework.boot:spring-boot-starter")
     compileOnly("org.springframework.boot:spring-boot-starter-web")
+    compileOnly("org.springframework.boot:spring-boot-starter-data-jpa")
+    
+    // Validation
+    implementation("jakarta.validation:jakarta.validation-api")
+    
+    // Spring Data (for PageRequest/PageResponse integration)
+    compileOnly("org.springframework.data:spring-data-commons")
     
     // Logging dependencies
     implementation("org.slf4j:slf4j-api")
@@ -52,10 +59,14 @@ dependencies {
     // MDC support
     implementation("org.slf4j:slf4j-ext")
     
+    // Architecture tests
+    testImplementation("com.tngtech.archunit:archunit-junit5:1.3.0")
+    
     // Testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.mockito:mockito-core")
+    testImplementation("org.hibernate.validator:hibernate-validator")
 }
 
 tasks.test {
